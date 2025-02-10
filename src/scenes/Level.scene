@@ -16,9 +16,29 @@
             "prefabId": "10ba7bd1-2cdf-4800-a85a-e5d90b6aae9d",
             "id": "d7cce9f1-c59c-462d-ba4c-21a86034ed68",
             "label": "platformGroupPrefab"
+        },
+        {
+            "prefabId": "4258f822-0290-43df-8540-1a0b61dc5d8f",
+            "id": "557f5a6e-4a96-48b2-b39d-8960b6d5e259",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "playerPrefab",
+            "x": 83,
+            "y": 97
         }
     ],
-    "plainObjects": [],
+    "plainObjects": [
+        {
+            "id": "7b36268d-2976-478a-823a-0c9ca8cb05cc",
+            "type": "Collider",
+            "label": "playerWithPlatformsCollider",
+            "scope": "LOCAL",
+            "object1": "playerPrefab",
+            "object2": "platformGroupPrefab.group"
+        }
+    ],
     "meta": {
         "app": "Phaser Editor - Scene Editor",
         "url": "https://phaser.io/editor",

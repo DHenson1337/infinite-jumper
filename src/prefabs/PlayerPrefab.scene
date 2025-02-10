@@ -1,5 +1,5 @@
 {
-    "id": "0f0894b7-f8c6-4a7a-8d54-2a25edca781a",
+    "id": "4258f822-0290-43df-8540-1a0b61dc5d8f",
     "sceneType": "PREFAB",
     "settings": {
         "exportClass": true,
@@ -8,23 +8,23 @@
         "preloadMethodName": "",
         "preloadPackFiles": [],
         "createMethodName": "",
-        "borderWidth": 1280,
-        "borderHeight": 720
+        "borderWidth": 240,
+        "borderHeight": 176
     },
     "displayList": [
         {
-            "type": "ArcadeImage",
-            "id": "6f1099d2-3f53-4c72-97c3-3059da2c914f",
-            "label": "arcadeimage_1",
+            "type": "ArcadeSprite",
+            "id": "b2eab10b-cd87-4169-9246-786b7d1c095a",
+            "label": "arcadesprite_1",
             "texture": {
-                "key": "platform"
+                "key": "player",
+                "frame": "player-idle-1.png"
             },
-            "scaleX": 0.75,
-            "scaleY": 0.5,
-            "allowGravity": false,
-            "pushable": false,
-            "body.width": 80,
-            "body.height": 16
+            "up": false,
+            "body.width": 11,
+            "body.height": 44,
+            "body.offset.x": 35,
+            "body.offset.y": 20
         }
     ],
     "plainObjects": [],

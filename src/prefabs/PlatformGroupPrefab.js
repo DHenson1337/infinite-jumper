@@ -25,7 +25,7 @@ export default class PlatformGroupPrefab extends Phaser.GameObjects.Layer {
 
     for (let i = 1; i < 5; i++) {
       const x = Phaser.Math.Between(10, 200); //X range for new platform
-      const y = -40 * i + 150;
+      const y = -140 * i + 150;
       this.group.get(x, y);
     }
 

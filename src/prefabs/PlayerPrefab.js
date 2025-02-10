@@ -6,17 +6,15 @@
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class PlatformPrefab extends Phaser.Physics.Arcade.Image {
+export default class PlayerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	constructor(scene, x, y, texture, frame) {
-		super(scene, x ?? 0, y ?? 0, texture || "platform", frame);
+		super(scene, x ?? 0, y ?? 0, texture || "player", frame ?? "player-idle-1.png");
 
-		this.scaleX = 0.75;
-		this.scaleY = 0.5;
 		scene.physics.add.existing(this, false);
-		this.body.allowGravity = false;
-		this.body.pushable = false;
-		this.body.setSize(80, 16, false);
+		this.body.checkCollision.up = false;
+		this.body.setOffset(35, 20);
+		this.body.setSize(11, 44, false);
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.

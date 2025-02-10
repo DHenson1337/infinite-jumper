@@ -4,6 +4,7 @@
 /* START OF COMPILED CODE */
 
 import PlatformGroupPrefab from "../prefabs/PlatformGroupPrefab.js";
+import PlayerPrefab from "../prefabs/PlayerPrefab.js";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -23,6 +24,13 @@ export default class Level extends Phaser.Scene {
 		// platformGroupPrefab
 		const platformGroupPrefab = new PlatformGroupPrefab(this);
 		this.add.existing(platformGroupPrefab);
+
+		// playerPrefab
+		const playerPrefab = new PlayerPrefab(this, 83, 97);
+		this.add.existing(playerPrefab);
+
+		// playerWithPlatformsCollider
+		this.physics.add.collider(playerPrefab, platformGroupPrefab.group);
 
 		this.events.emit("scene-awake");
 	}
