@@ -1,4 +1,3 @@
-
 // You can write more code here
 
 /* START OF COMPILED CODE */
@@ -9,44 +8,55 @@ import PlayerPrefab from "../prefabs/PlayerPrefab.js";
 /* END-USER-IMPORTS */
 
 export default class Level extends Phaser.Scene {
+  constructor() {
+    super("Level");
 
-	constructor() {
-		super("Level");
+    /* START-USER-CTR-CODE */
+    // Write your code here.
+    /* END-USER-CTR-CODE */
+  }
 
-		/* START-USER-CTR-CODE */
-		// Write your code here.
-		/* END-USER-CTR-CODE */
-	}
+  /** @returns {void} */
+  editorCreate() {
+    // platformGroupPrefab
+    const platformGroupPrefab = new PlatformGroupPrefab(this);
+    this.add.existing(platformGroupPrefab);
 
-	/** @returns {void} */
-	editorCreate() {
+    // player
+    const player = new PlayerPrefab(this, 83, 97);
+    this.add.existing(player);
 
-		// platformGroupPrefab
-		const platformGroupPrefab = new PlatformGroupPrefab(this);
-		this.add.existing(platformGroupPrefab);
+    // playerWithPlatformsCollider
+    this.physics.add.collider(player, platformGroupPrefab.group);
 
-		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 83, 97);
-		this.add.existing(playerPrefab);
+    this.player = player;
 
-		// playerWithPlatformsCollider
-		this.physics.add.collider(playerPrefab, platformGroupPrefab.group);
+    this.events.emit("scene-awake");
+  }
 
-		this.events.emit("scene-awake");
-	}
+  /** @type {PlayerPrefab} */
+  player;
 
-	/* START-USER-CODE */
+  /* START-USER-CODE */
 
-	// Write more your code here
+  // Write more your code here
 
-	create() {
+  create() {
+    this.editorCreate();
 
-		this.editorCreate();
+    // Camera to follow player
+    this.cameras.main.startFollow(this.player, false, 0.1, 1, 0.1);
+  }
 
+  update() {
+    // Checks collision on the player touching down
+    const isTouchingDown = this.player.body.touching.down;
+    if (isTouchingDown) {
+      this.player.setVelocityY(-350);
+    }
+  }
 
-	}
-
-	/* END-USER-CODE */
+  /* END-USER-CODE */
 }
 
 /* END OF COMPILED CODE */
