@@ -1,21 +1,22 @@
 {
-    "id": "01aefa93-6044-4159-8358-7e91310aa05f",
-    "sceneType": "SCENE",
+    "id": "10ba7bd1-2cdf-4800-a85a-e5d90b6aae9d",
+    "sceneType": "PREFAB",
     "settings": {
         "exportClass": true,
         "autoImport": true,
         "importFileExtension": true,
+        "preloadMethodName": "",
         "preloadPackFiles": [],
-        "createMethodName": "editorCreate",
-        "sceneKey": "Level",
+        "createMethodName": "",
         "borderWidth": 240,
         "borderHeight": 176
     },
     "displayList": [
         {
-            "prefabId": "10ba7bd1-2cdf-4800-a85a-e5d90b6aae9d",
-            "id": "d7cce9f1-c59c-462d-ba4c-21a86034ed68",
-            "label": "platformGroupPrefab"
+            "type": "Layer",
+            "id": "5c2eda18-44d8-4edc-9b85-733356147693",
+            "label": "layer_1",
+            "blendMode": -1
         }
     ],
     "plainObjects": [],
