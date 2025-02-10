@@ -27,8 +27,8 @@
             "label": "player",
             "displayName": "Player",
             "scope": "CLASS",
-            "x": 83,
-            "y": 97
+            "x": 87,
+            "y": 64
         }
     ],
     "plainObjects": [
@@ -39,6 +39,18 @@
             "scope": "LOCAL",
             "object1": "player",
             "object2": "platformGroupPrefab.group"
+        },
+        {
+            "id": "39940140-0581-42b1-bb34-b63d19a168fa",
+            "type": "Keyboard.Key",
+            "label": "leftKeyboard_key",
+            "keyCode": "LEFT"
+        },
+        {
+            "id": "92e7dd6b-4115-4edd-babf-697ec06f1108",
+            "type": "Keyboard.Key",
+            "label": "rightKeyboard_key",
+            "keyCode": "RIGHT"
         }
     ],
     "meta": {

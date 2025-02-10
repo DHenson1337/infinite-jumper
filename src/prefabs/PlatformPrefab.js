@@ -15,6 +15,8 @@ export default class PlatformPrefab extends Phaser.Physics.Arcade.Image {
 		this.scaleY = 0.5;
 		scene.physics.add.existing(this, false);
 		this.body.allowGravity = false;
+		this.body.checkCollision.left = false;
+		this.body.checkCollision.right = false;
 		this.body.pushable = false;
 		this.body.setSize(80, 16, false);
 
