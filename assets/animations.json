@@ -1,0 +1,154 @@
+{
+    "anims": [
+        {
+            "key": "playerIdle",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "player",
+                    "frame": "player-idle-1.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-idle-2.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-idle-3.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-idle-4.png",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 6,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "playerJump",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "player",
+                    "frame": "player-jump-1.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-jump-2.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-jump-3.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-jump-4.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-jump-5.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-jump-6.png",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 18,
+            "skipMissedFrames": true,
+            "randomFrame": false
+        },
+        {
+            "key": "playerSpin",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "player",
+                    "frame": "player-jump-2.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-jump-3.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-jump-4.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-jump-5.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-jump-6.png",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 16,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "playerHurt",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "player",
+                    "frame": "player-hurt-1.png",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "player",
+                    "frame": "player-hurt-2.png",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "randomFrame": false
+        }
+    ],
+    "globalTimeScale": 1,
+    "meta": {
+        "app": "Phaser Editor 2D v3",
+        "contentType": "Phaser v3 Animations"
+    },
+    "settings": {
+        "sourceLang": "JAVA_SCRIPT",
+        "esModule": false,
+        "generateCode": false
+    }
+}

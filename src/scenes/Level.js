@@ -67,11 +67,20 @@ export default class Level extends Phaser.Scene {
 
   update() {
     // Checks collision on the player touching down
-    // Player movement
+    // Player movement & animations
 
     // Player Collision with the platform
     const isTouchingDown = this.player.body.touching.down;
     if (isTouchingDown) {
+      this.player.play("playerJump"); // Plays Player Jump animation.
+
+      // Checks if Jump animation has completed and then plays Spin animation
+      this.player.once(
+        Phaser.Animations.Events.ANIMATION_COMPLETE_KEY + "playerJump",
+        () => {
+          this.player.play("playerSpin");
+        }
+      );
       this.player.setVelocityY(-350);
       if (!this.firstJumpMade) {
         this.firstJumpMade = true;
@@ -80,6 +89,7 @@ export default class Level extends Phaser.Scene {
     // Player Left Direction movement
     if (this.leftKeyboard_key.isDown && !isTouchingDown && this.firstJumpMade) {
       this.player.setVelocityX(-150);
+      this.player.setFlipX(true); //Flips Player to face opposite direction
 
       // Player right Direction Movement
     } else if (
@@ -88,6 +98,7 @@ export default class Level extends Phaser.Scene {
       this.firstJumpMade
     ) {
       this.player.setVelocityX(150);
+      this.player.setFlipX(false); // Reverts/ normal player direction
 
       // Return to neutral velocity
     } else {
