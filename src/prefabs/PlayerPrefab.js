@@ -15,6 +15,7 @@ export default class PlayerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.body.checkCollision.up = false;
 		this.body.setOffset(35, 20);
 		this.body.setSize(11, 44, false);
+		this.play("playerIdle");
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.

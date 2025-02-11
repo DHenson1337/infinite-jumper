@@ -2,8 +2,9 @@
 
 /* START OF COMPILED CODE */
 
-import PlatformGroupPrefab from "../prefabs/PlatformGroupPrefab.js";
+import WallPrefab from "../prefabs/WallPrefab.js";
 import PlayerPrefab from "../prefabs/PlayerPrefab.js";
+import PlatformGroupPrefab from "../prefabs/PlatformGroupPrefab.js";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -28,20 +29,45 @@ export default class Level extends Phaser.Scene {
       Phaser.Input.Keyboard.KeyCodes.RIGHT
     );
 
+    // levelLayer
+    const levelLayer = this.add.layer();
+    levelLayer.blendMode = Phaser.BlendModes.SKIP_CHECK;
+
+    // leftWallTileSprite
+    const leftWallTileSprite = new WallPrefab(this, 0, 0);
+    levelLayer.add(leftWallTileSprite);
+
+    // rightWallTileSprite
+    const rightWallTileSprite = new WallPrefab(this, 208, 0);
+    rightWallTileSprite.flipX = true;
+    rightWallTileSprite.flipY = false;
+    levelLayer.add(rightWallTileSprite);
+
+    // playerLayer
+    const playerLayer = this.add.layer();
+    playerLayer.blendMode = Phaser.BlendModes.SKIP_CHECK;
+
+    // player
+    const player = new PlayerPrefab(this, 120, 64);
+    playerLayer.add(player);
+
     // platformGroupPrefab
     const platformGroupPrefab = new PlatformGroupPrefab(this);
     this.add.existing(platformGroupPrefab);
 
-    // player
-    const player = new PlayerPrefab(this, 87, 64);
-    this.add.existing(player);
+    // lists
+    const movingLevelTileSprites = [rightWallTileSprite, leftWallTileSprite];
 
     // playerWithPlatformsCollider
     this.physics.add.collider(player, platformGroupPrefab.group);
 
+    // rightWallTileSprite (prefab fields)
+    rightWallTileSprite.tileOffsetY = -120;
+
     this.player = player;
     this.leftKeyboard_key = leftKeyboard_key;
     this.rightKeyboard_key = rightKeyboard_key;
+    this.movingLevelTileSprites = movingLevelTileSprites;
 
     this.events.emit("scene-awake");
   }
@@ -52,6 +78,8 @@ export default class Level extends Phaser.Scene {
   leftKeyboard_key;
   /** @type {Phaser.Input.Keyboard.Key} */
   rightKeyboard_key;
+  /** @type {WallPrefab[]} */
+  movingLevelTileSprites;
 
   /* START-USER-CODE */
   firstJumpMade = false; //Prevents movement b4 first jump
@@ -104,6 +132,11 @@ export default class Level extends Phaser.Scene {
     } else {
       this.player.setVelocityX(0);
     }
+
+    // Tile Sprite repeat code animation (so the walls don't look static)
+    this.movingLevelTileSprites.forEach((tileSprite) => {
+      tileSprite.tilePositionY = this.player.y * 0.2 + tileSprite.tileOffsetY;
+    });
   }
 
   /* END-USER-CODE */

@@ -13,22 +13,68 @@
     },
     "displayList": [
         {
+            "type": "Layer",
+            "id": "2d177133-151a-4002-89b0-fa569a961159",
+            "label": "levelLayer",
+            "blendMode": -1,
+            "list": [
+                {
+                    "prefabId": "f7c2ba08-373d-40d6-88cc-69111afa0fa7",
+                    "id": "c14b1fb2-7b0a-4813-8f7a-20d7662f7b09",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "leftWallTileSprite",
+                    "displayName": "Left Wall",
+                    "x": 0,
+                    "y": 0
+                },
+                {
+                    "prefabId": "f7c2ba08-373d-40d6-88cc-69111afa0fa7",
+                    "id": "ec1eae96-fc52-498b-a008-ecd0ea82f7bf",
+                    "unlock": [
+                        "x",
+                        "y",
+                        "flipX",
+                        "flipY",
+                        "tileOffsetY"
+                    ],
+                    "label": "rightWallTileSprite",
+                    "displayName": "Right Wall",
+                    "tileOffsetY": -120,
+                    "x": 208,
+                    "y": 0,
+                    "flipX": true,
+                    "flipY": false
+                }
+            ]
+        },
+        {
+            "type": "Layer",
+            "id": "60b59628-8d38-40d8-b374-d247f9b22c36",
+            "label": "playerLayer",
+            "blendMode": -1,
+            "list": [
+                {
+                    "prefabId": "4258f822-0290-43df-8540-1a0b61dc5d8f",
+                    "id": "557f5a6e-4a96-48b2-b39d-8960b6d5e259",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "player",
+                    "displayName": "Player",
+                    "scope": "CLASS",
+                    "x": 120,
+                    "y": 64
+                }
+            ]
+        },
+        {
             "prefabId": "10ba7bd1-2cdf-4800-a85a-e5d90b6aae9d",
             "id": "d7cce9f1-c59c-462d-ba4c-21a86034ed68",
             "label": "platformGroupPrefab"
-        },
-        {
-            "prefabId": "4258f822-0290-43df-8540-1a0b61dc5d8f",
-            "id": "557f5a6e-4a96-48b2-b39d-8960b6d5e259",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "player",
-            "displayName": "Player",
-            "scope": "CLASS",
-            "x": 87,
-            "y": 64
         }
     ],
     "plainObjects": [
@@ -58,5 +104,15 @@
         "url": "https://phaser.io/editor",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
         "version": 5
-    }
+    },
+    "lists": [
+        {
+            "id": "a724f177-f46d-4ce4-bad2-2f76300e7f30",
+            "label": "movingLevelTileSprites",
+            "objectIds": [
+                "ec1eae96-fc52-498b-a008-ecd0ea82f7bf",
+                "c14b1fb2-7b0a-4813-8f7a-20d7662f7b09"
+            ]
+        }
+    ]
 }

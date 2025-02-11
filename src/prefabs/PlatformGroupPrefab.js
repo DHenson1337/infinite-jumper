@@ -21,7 +21,7 @@ export default class PlatformGroupPrefab extends Phaser.GameObjects.Layer {
     });
 
     // Returns first elligible game object, creates one if not avilable
-    this.group.get(90, 150);
+    this.group.get(120, 150);
 
     for (let i = 1; i < 5; i++) {
       const x = Phaser.Math.Between(10, 200); //X range for new platform
