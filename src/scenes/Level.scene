@@ -97,6 +97,14 @@
             "type": "Keyboard.Key",
             "label": "rightKeyboard_key",
             "keyCode": "RIGHT"
+        },
+        {
+            "id": "80236540-5389-45ac-a862-a78b59b91944",
+            "type": "Collider",
+            "label": "playerWithWallsCollider",
+            "scope": "LOCAL",
+            "object1": "player",
+            "object2": "walls"
         }
     ],
     "meta": {
@@ -112,6 +120,14 @@
             "objectIds": [
                 "ec1eae96-fc52-498b-a008-ecd0ea82f7bf",
                 "c14b1fb2-7b0a-4813-8f7a-20d7662f7b09"
+            ]
+        },
+        {
+            "id": "4bd57197-a049-4ed7-b3f9-7ea89fd60372",
+            "label": "walls",
+            "objectIds": [
+                "c14b1fb2-7b0a-4813-8f7a-20d7662f7b09",
+                "ec1eae96-fc52-498b-a008-ecd0ea82f7bf"
             ]
         }
     ]

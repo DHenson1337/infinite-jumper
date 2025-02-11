@@ -6,24 +6,42 @@
 /* END-USER-IMPORTS */
 
 export default class WallPrefab extends Phaser.GameObjects.TileSprite {
+  constructor(scene, x, y, width, height, texture, frame) {
+    super(
+      scene,
+      x ?? 0,
+      y ?? 0,
+      width ?? 32,
+      height ?? 176,
+      texture || "wall",
+      frame
+    );
 
-	constructor(scene, x, y, width, height, texture, frame) {
-		super(scene, x ?? 0, y ?? 0, width ?? 32, height ?? 176, texture || "wall", frame);
+    this.setOrigin(0, 0);
 
-		this.setOrigin(0, 0);
-
-		/* START-USER-CTR-CODE */
+    /* START-USER-CTR-CODE */
     // Write your code here.
 
     //Prevents the walls from scrolling off the scene
     this.setScrollFactor(0);
+
+    // Add Physics to the walls
+
+    /** @type {number} */
+    const _scene = scene;
+    _scene.physics.world.enable(this);
+    this.body
+      .setImmovable(true)
+      .setAllowGravity(false)
+      .setSize(16, this.height)
+      .setOffset(0, 0);
     /* END-USER-CTR-CODE */
-	}
+  }
 
-	/** @type {number} */
-	tileOffsetY = 0;
+  /** @type {number} */
+  tileOffsetY = 0;
 
-	/* START-USER-CODE */
+  /* START-USER-CODE */
 
   // Write your code here.
 
