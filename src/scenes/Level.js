@@ -48,7 +48,7 @@ export default class Level extends Phaser.Scene {
     playerLayer.blendMode = Phaser.BlendModes.SKIP_CHECK;
 
     // player
-    const player = new PlayerPrefab(this, 120, 64);
+    const player = new PlayerPrefab(this, 120, -84);
     playerLayer.add(player);
 
     // platformGroupPrefab
@@ -93,6 +93,7 @@ export default class Level extends Phaser.Scene {
 
   /* START-USER-CODE */
   firstJumpMade = false; //Prevents movement b4 first jump
+  isGameOver = false;
   // Write more your code here
 
   create() {
@@ -106,6 +107,9 @@ export default class Level extends Phaser.Scene {
 
     //first jump action
     this.firstJumpMade = false;
+
+    // Game Over state
+    this.isGameOver = false;
   }
 
   update() {
@@ -130,7 +134,12 @@ export default class Level extends Phaser.Scene {
       }
     }
     // Player Left Direction movement
-    if (this.leftKeyboard_key.isDown && !isTouchingDown && this.firstJumpMade) {
+    if (
+      this.leftKeyboard_key.isDown &&
+      !isTouchingDown &&
+      this.firstJumpMade &&
+      !this.isGameOver
+    ) {
       this.player.setVelocityX(-150);
       this.player.setFlipX(true); //Flips Player to face opposite direction
 
@@ -138,7 +147,8 @@ export default class Level extends Phaser.Scene {
     } else if (
       this.rightKeyboard_key.isDown &&
       !isTouchingDown &&
-      this.firstJumpMade
+      this.firstJumpMade &&
+      !this.isGameOver
     ) {
       this.player.setVelocityX(150);
       this.player.setFlipX(false); // Reverts/ normal player direction
@@ -161,6 +171,33 @@ export default class Level extends Phaser.Scene {
         tileSprite.body.setOffset(0, this.cameras.main.worldView.y);
       }
     });
+
+    // Checks if game is over
+    if (this.isGameOver) {
+      this.player.setVelocityY(135); //Slows down the players fall on gameover
+      return;
+    }
+
+    if (
+      this.player.y >
+      this.platformGroupPrefab.bottomMostPlatformYPosition + 50
+    ) {
+      this.isGameOver = true;
+      this.player.play("playerHurt");
+      this.player.setVelocityY(135); //Slows down the players fall on gameover
+
+      // Special effets for the players death
+      const wipeFx = this.player.postFX.addWipe(0.1, 0, 1); //Slowly wipes the player on gameover
+      this.tweens.add({
+        targets: wipeFx,
+        progress: 1,
+        duration: 2500,
+        onComplete: () => {
+          this.player.body.enable = false;
+          console.log("Game Over💔");
+        },
+      });
+    }
 
     this.platformGroupPrefab.update();
   }
