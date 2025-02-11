@@ -28,14 +28,39 @@ export default class PlatformGroupPrefab extends Phaser.GameObjects.Layer {
       const y = -140 * i + 150;
       this.group.get(x, y);
     }
-
+    // Max distance platforms can be away from player view before respawn (logic elsewhere)
+    this.maxPlatformDistance = scene.scale.height * 3;
     /* END-USER-CTR-CODE */
   }
 
   /* START-USER-CODE */
-  /* @type {Phaser.GameObjects.Group} */
+  /**  @type {Phaser.GameObjects.Group} */
   group;
+  /**  @type {Phaser.GameObjects.Group} */
+  maxPlatformDistance;
   // Write your code here.
+
+  update() {
+    //Camera current position
+    const scrollY = this.scene.cameras.main.scrollY;
+    const children = this.group.getChildren();
+    const childrenToMove = [];
+
+    // Moves platforms outside of camera's max distance to the top
+    children.forEach((child) => {
+      if (child.y >= scrollY + this.maxPlatformDistance) {
+        childrenToMove.push(child);
+      }
+    });
+
+    //Distance to spawn each game object away from starting position
+    let childrenToMoveYOffset = 0;
+    childrenToMove.forEach((child) => {
+      child.x = Phaser.Math.Between(10, 200);
+      childrenToMoveYOffset += Phaser.Math.Between(10, 40);
+      child.y = scrollY - childrenToMoveYOffset;
+    });
+  }
 
   /* END-USER-CODE */
 }
