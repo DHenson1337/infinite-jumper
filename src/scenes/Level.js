@@ -11,98 +11,105 @@ import LaunchSceneActionScript from "../scriptnodes/scene/LaunchSceneActionScrip
 /* END-USER-IMPORTS */
 
 export default class Level extends Phaser.Scene {
+  constructor() {
+    super("Level");
 
-	constructor() {
-		super("Level");
-
-		/* START-USER-CTR-CODE */
+    /* START-USER-CTR-CODE */
     // Write your code here.
     /* END-USER-CTR-CODE */
-	}
+  }
 
-	/** @returns {void} */
-	editorCreate() {
+  /** @returns {void} */
+  editorCreate() {
+    // leftKeyboard_key
+    const leftKeyboard_key = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.LEFT
+    );
 
-		// leftKeyboard_key
-		const leftKeyboard_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+    // rightKeyboard_key
+    const rightKeyboard_key = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.RIGHT
+    );
 
-		// rightKeyboard_key
-		const rightKeyboard_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+    // levelLayer
+    const levelLayer = this.add.layer();
+    levelLayer.blendMode = Phaser.BlendModes.SKIP_CHECK;
 
-		// levelLayer
-		const levelLayer = this.add.layer();
-		levelLayer.blendMode = Phaser.BlendModes.SKIP_CHECK;
+    // leftWallTileSprite
+    const leftWallTileSprite = new WallPrefab(this, 0, 0);
+    levelLayer.add(leftWallTileSprite);
 
-		// leftWallTileSprite
-		const leftWallTileSprite = new WallPrefab(this, 0, 0);
-		levelLayer.add(leftWallTileSprite);
+    // rightWallTileSprite
+    const rightWallTileSprite = new WallPrefab(this, 208, 0);
+    rightWallTileSprite.flipX = true;
+    rightWallTileSprite.flipY = false;
+    levelLayer.add(rightWallTileSprite);
 
-		// rightWallTileSprite
-		const rightWallTileSprite = new WallPrefab(this, 208, 0);
-		rightWallTileSprite.flipX = true;
-		rightWallTileSprite.flipY = false;
-		levelLayer.add(rightWallTileSprite);
+    // playerLayer
+    const playerLayer = this.add.layer();
+    playerLayer.blendMode = Phaser.BlendModes.SKIP_CHECK;
 
-		// playerLayer
-		const playerLayer = this.add.layer();
-		playerLayer.blendMode = Phaser.BlendModes.SKIP_CHECK;
+    // player
+    const player = new PlayerPrefab(this, 120, -84);
+    playerLayer.add(player);
 
-		// player
-		const player = new PlayerPrefab(this, 120, -84);
-		playerLayer.add(player);
+    // platformGroupPrefab
+    const platformGroupPrefab = new PlatformGroupPrefab(this);
+    this.add.existing(platformGroupPrefab);
 
-		// platformGroupPrefab
-		const platformGroupPrefab = new PlatformGroupPrefab(this);
-		this.add.existing(platformGroupPrefab);
+    // onAwakeActionScript
+    const onAwakeActionScript = new OnAwakeActionScript(this);
 
-		// onAwakeActionScript
-		const onAwakeActionScript = new OnAwakeActionScript(this);
+    // launchSceneActionScript
+    const launchSceneActionScript = new LaunchSceneActionScript(
+      onAwakeActionScript
+    );
 
-		// launchSceneActionScript
-		const launchSceneActionScript = new LaunchSceneActionScript(onAwakeActionScript);
+    // lists
+    const movingLevelTileSprites = [rightWallTileSprite, leftWallTileSprite];
+    const walls = [leftWallTileSprite, rightWallTileSprite];
 
-		// lists
-		const movingLevelTileSprites = [rightWallTileSprite, leftWallTileSprite];
-		const walls = [leftWallTileSprite, rightWallTileSprite];
+    // playerWithPlatformsCollider
+    this.physics.add.collider(player, platformGroupPrefab.group);
 
-		// playerWithPlatformsCollider
-		this.physics.add.collider(player, platformGroupPrefab.group);
+    // playerWithWallsCollider
+    this.physics.add.collider(player, walls);
 
-		// playerWithWallsCollider
-		this.physics.add.collider(player, walls);
+    // rightWallTileSprite (prefab fields)
+    rightWallTileSprite.tileOffsetY = -120;
 
-		// rightWallTileSprite (prefab fields)
-		rightWallTileSprite.tileOffsetY = -120;
+    // launchSceneActionScript (prefab fields)
+    launchSceneActionScript.sceneKey = "UI";
 
-		// launchSceneActionScript (prefab fields)
-		launchSceneActionScript.sceneKey = "UI";
+    this.player = player;
+    this.platformGroupPrefab = platformGroupPrefab;
+    this.leftKeyboard_key = leftKeyboard_key;
+    this.rightKeyboard_key = rightKeyboard_key;
+    this.movingLevelTileSprites = movingLevelTileSprites;
+    this.walls = walls;
 
-		this.player = player;
-		this.platformGroupPrefab = platformGroupPrefab;
-		this.leftKeyboard_key = leftKeyboard_key;
-		this.rightKeyboard_key = rightKeyboard_key;
-		this.movingLevelTileSprites = movingLevelTileSprites;
-		this.walls = walls;
+    this.events.emit("scene-awake");
+  }
 
-		this.events.emit("scene-awake");
-	}
+  /** @type {PlayerPrefab} */
+  player;
+  /** @type {PlatformGroupPrefab} */
+  platformGroupPrefab;
+  /** @type {Phaser.Input.Keyboard.Key} */
+  leftKeyboard_key;
+  /** @type {Phaser.Input.Keyboard.Key} */
+  rightKeyboard_key;
+  /** @type {WallPrefab[]} */
+  movingLevelTileSprites;
+  /** @type {WallPrefab[]} */
+  walls;
 
-	/** @type {PlayerPrefab} */
-	player;
-	/** @type {PlatformGroupPrefab} */
-	platformGroupPrefab;
-	/** @type {Phaser.Input.Keyboard.Key} */
-	leftKeyboard_key;
-	/** @type {Phaser.Input.Keyboard.Key} */
-	rightKeyboard_key;
-	/** @type {WallPrefab[]} */
-	movingLevelTileSprites;
-	/** @type {WallPrefab[]} */
-	walls;
-
-	/* START-USER-CODE */
+  /* START-USER-CODE */
   firstJumpMade = false; //Prevents movement b4 first jump
   isGameOver = false;
+  currentScore = 0; //Starting Score
+  maxHeight = 0;
+  startingMaxHeight = 0;
   // Write more your code here
 
   create() {
@@ -119,9 +126,19 @@ export default class Level extends Phaser.Scene {
 
     // Game Over state
     this.isGameOver = false;
+
+    //Initial Score
+    this.currentScore = 0;
+
+    //Score Tracker
+    this.maxHeight = 0;
+    this.startingMaxHeight = 0;
   }
 
   update() {
+    //The Players current Y position
+    const distance = Math.floor(Math.abs(this.player.body.bottom));
+
     // Checks collision on the player touching down
     // Player movement & animations
 
@@ -140,6 +157,7 @@ export default class Level extends Phaser.Scene {
       this.player.setVelocityY(-350);
       if (!this.firstJumpMade) {
         this.firstJumpMade = true;
+        this.startingMaxHeight = distance; // Value for startingMaxHeight
       }
     }
     // Player Left Direction movement
@@ -185,6 +203,15 @@ export default class Level extends Phaser.Scene {
     if (this.isGameOver) {
       this.player.setVelocityY(135); //Slows down the players fall on gameover
       return;
+    }
+
+    // Score Tracker
+    if (distance > this.maxHeight && this.firstJumpMade) {
+      this.maxHeight = distance;
+      this.currentScore = Math.floor(
+        (this.maxHeight - this.startingMaxHeight) / 10
+      );
+      this.scene.get("UI").updateScoreText(this.currentScore);
     }
 
     if (
