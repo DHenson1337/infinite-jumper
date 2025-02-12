@@ -76,6 +76,22 @@
             "id": "d7cce9f1-c59c-462d-ba4c-21a86034ed68",
             "label": "platformGroupPrefab",
             "scope": "CLASS"
+        },
+        {
+            "prefabId": "7bf8a19d-1211-4b59-bb38-b034085b171f",
+            "id": "2386fc06-00e4-4cbf-ac4b-e1794922bb30",
+            "label": "onAwakeActionScript",
+            "list": [
+                {
+                    "prefabId": "0ed1159f-ee3d-4ce9-82da-e76768c045b5",
+                    "id": "66b7ce0e-3b94-474a-87ae-b0d066fe3fb9",
+                    "unlock": [
+                        "sceneKey"
+                    ],
+                    "label": "launchSceneActionScript",
+                    "sceneKey": "UI"
+                }
+            ]
         }
     ],
     "plainObjects": [
