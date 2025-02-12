@@ -16,8 +16,11 @@ export default class PlatformGroupPrefab extends Phaser.GameObjects.Layer {
 
     /* START-USER-CTR-CODE */
     // Write your code here.
+    /** @type {Phaser.scene} */
+    const _scene = scene;
     this.group = scene.add.group({
       classType: PlatformPrefab,
+      runChildUpdate: true, //Phaser calls the update methods of the child (PlatformPrefab)
     });
 
     // Returns first elligible game object, creates one if not avilable
@@ -25,7 +28,7 @@ export default class PlatformGroupPrefab extends Phaser.GameObjects.Layer {
 
     for (let i = 1; i < 5; i++) {
       const x = Phaser.Math.Between(10, 200); //X range for new platform
-      const y = -140 * i;
+      const y = -150 * i;
       this.group.get(x, y);
     }
     // Max distance platforms can be away from player view before respawn (logic elsewhere)
@@ -37,10 +40,12 @@ export default class PlatformGroupPrefab extends Phaser.GameObjects.Layer {
   /* START-USER-CODE */
   /**  @type {Phaser.GameObjects.Group} */
   group;
-  /**  @type {Phaser.GameObjects.Group} */
+  /**  @type {number} */
   maxPlatformDistance;
-  /**  @type {Phaser.GameObjects.Group} */
+  /**  @type {number} */
   bottomMostPlatformYPosition;
+  /**  @type {boolean} */
+  enableMovingPlatforms = false;
   // Write your code here.
 
   update() {
@@ -65,8 +70,17 @@ export default class PlatformGroupPrefab extends Phaser.GameObjects.Layer {
     let childrenToMoveYOffset = 0;
     childrenToMove.forEach((child) => {
       child.x = Phaser.Math.Between(10, 200);
-      childrenToMoveYOffset += Phaser.Math.Between(10, 40);
+      childrenToMoveYOffset += Phaser.Math.Between(10, 30);
       child.y = scrollY - childrenToMoveYOffset;
+
+      // Enable moving platforms
+      if (this.enableMovingPlatforms) {
+        if (Phaser.Math.RND.between(0, 1) === 1) {
+          child.startPlatformMovement();
+        } else {
+          child.stopPlatformMovement();
+        }
+      }
     });
   }
 

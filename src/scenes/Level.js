@@ -110,6 +110,7 @@ export default class Level extends Phaser.Scene {
   currentScore = 0; //Starting Score
   maxHeight = 0;
   startingMaxHeight = 0;
+  level = 0; //starting difficulty
   // Write more your code here
 
   create() {
@@ -133,6 +134,9 @@ export default class Level extends Phaser.Scene {
     //Score Tracker
     this.maxHeight = 0;
     this.startingMaxHeight = 0;
+
+    //Difficulty level
+    this.level = 0;
   }
 
   update() {
@@ -212,6 +216,11 @@ export default class Level extends Phaser.Scene {
         (this.maxHeight - this.startingMaxHeight) / 10
       );
       this.scene.get("UI").updateScoreText(this.currentScore);
+
+      //  Difficulty Setter
+      if (this.level === 0 && this.currentScore > 200) {
+        this.platformGroupPrefab.enableMovingPlatforms = true;
+      }
     }
 
     if (
