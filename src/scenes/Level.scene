@@ -19,6 +19,28 @@
             "blendMode": -1,
             "list": [
                 {
+                    "prefabId": "e36e39bf-96f0-4272-8f6e-d595a0716073",
+                    "id": "7d1bda0e-61c3-4e9d-a91a-fc42a65e60fb",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "backgroundPrefab",
+                    "x": 0,
+                    "y": 0
+                },
+                {
+                    "prefabId": "74939ea9-b4be-4eae-b3df-66a4c233a179",
+                    "id": "fd5df970-e899-48de-baa0-a92b0f6b2c3f",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "foregroundPrefab",
+                    "x": 0,
+                    "y": 0
+                },
+                {
                     "prefabId": "f7c2ba08-373d-40d6-88cc-69111afa0fa7",
                     "id": "c14b1fb2-7b0a-4813-8f7a-20d7662f7b09",
                     "unlock": [
@@ -136,7 +158,8 @@
             "label": "movingLevelTileSprites",
             "objectIds": [
                 "ec1eae96-fc52-498b-a008-ecd0ea82f7bf",
-                "c14b1fb2-7b0a-4813-8f7a-20d7662f7b09"
+                "c14b1fb2-7b0a-4813-8f7a-20d7662f7b09",
+                "fd5df970-e899-48de-baa0-a92b0f6b2c3f"
             ]
         },
         {

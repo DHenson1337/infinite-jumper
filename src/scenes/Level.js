@@ -2,6 +2,8 @@
 
 /* START OF COMPILED CODE */
 
+import BackgroundPrefab from "../prefabs/BackgroundPrefab.js";
+import ForegroundPrefab from "../prefabs/ForegroundPrefab.js";
 import WallPrefab from "../prefabs/WallPrefab.js";
 import PlayerPrefab from "../prefabs/PlayerPrefab.js";
 import PlatformGroupPrefab from "../prefabs/PlatformGroupPrefab.js";
@@ -35,6 +37,14 @@ export default class Level extends Phaser.Scene {
     const levelLayer = this.add.layer();
     levelLayer.blendMode = Phaser.BlendModes.SKIP_CHECK;
 
+    // backgroundPrefab
+    const backgroundPrefab = new BackgroundPrefab(this, 0, 0);
+    levelLayer.add(backgroundPrefab);
+
+    // foregroundPrefab
+    const foregroundPrefab = new ForegroundPrefab(this, 0, 0);
+    levelLayer.add(foregroundPrefab);
+
     // leftWallTileSprite
     const leftWallTileSprite = new WallPrefab(this, 0, 0);
     levelLayer.add(leftWallTileSprite);
@@ -66,7 +76,11 @@ export default class Level extends Phaser.Scene {
     );
 
     // lists
-    const movingLevelTileSprites = [rightWallTileSprite, leftWallTileSprite];
+    const movingLevelTileSprites = [
+      rightWallTileSprite,
+      leftWallTileSprite,
+      foregroundPrefab,
+    ];
     const walls = [leftWallTileSprite, rightWallTileSprite];
 
     // playerWithPlatformsCollider
@@ -99,7 +113,7 @@ export default class Level extends Phaser.Scene {
   leftKeyboard_key;
   /** @type {Phaser.Input.Keyboard.Key} */
   rightKeyboard_key;
-  /** @type {WallPrefab[]} */
+  /** @type {Array<WallPrefab|ForegroundPrefab>} */
   movingLevelTileSprites;
   /** @type {WallPrefab[]} */
   walls;
@@ -191,7 +205,8 @@ export default class Level extends Phaser.Scene {
 
     // Tile Sprite repeat code animation (so the walls don't look static)
     this.movingLevelTileSprites.forEach((tileSprite) => {
-      tileSprite.tilePositionY = this.player.y * 0.2 + tileSprite.tileOffsetY;
+      tileSprite.tilePositionY =
+        this.player.y * 0.2 + (tileSprite.tileOffsetY || 0);
     });
 
     // The walls body (for hit collison)
