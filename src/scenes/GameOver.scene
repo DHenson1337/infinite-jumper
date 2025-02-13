@@ -1,0 +1,110 @@
+{
+    "id": "a439c9d1-fd39-405c-87cb-a99991739ce6",
+    "sceneType": "SCENE",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "importFileExtension": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "GameOver",
+        "borderWidth": 240,
+        "borderHeight": 176
+    },
+    "displayList": [
+        {
+            "type": "Text",
+            "id": "133c964a-e96b-4473-92b6-736f08484aa4",
+            "label": "gameOverTextGameObject",
+            "displayName": "Game Over",
+            "x": 30,
+            "y": 39,
+            "text": "Game Over",
+            "fontFamily": "PressStart2P-Regular",
+            "fontSize": "20px"
+        },
+        {
+            "type": "Text",
+            "id": "1a6189e1-94d1-451b-ba36-16714b531773",
+            "label": "scoreTextGameObject_1",
+            "displayName": "Score",
+            "x": 95,
+            "y": 97,
+            "text": "Score",
+            "fontFamily": "PressStart2P-Regular",
+            "fontSize": "10px"
+        },
+        {
+            "type": "Text",
+            "id": "b7de6bbe-9b3b-4235-bf82-a8ceb55dd67f",
+            "label": "scoreValueTextGameObject",
+            "displayName": "Score Value",
+            "scope": "CLASS",
+            "x": 120,
+            "y": 122,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "0",
+            "fontFamily": "PressStart2P-Regular",
+            "fontSize": "10px"
+        },
+        {
+            "prefabId": "7bf8a19d-1211-4b59-bb38-b034085b171f",
+            "id": "814a156e-587c-4cbc-9fcb-55ba052cdcb8",
+            "label": "onAwakeActionScript",
+            "list": [
+                {
+                    "prefabId": "26d6c86f-1f9a-4dc9-9d2e-f64a7fbbbb28",
+                    "id": "ec061017-f9c2-4fcc-86a1-ed946edf3768",
+                    "unlock": [
+                        "duration",
+                        "fadeEvent"
+                    ],
+                    "label": "fadeEffectCameraActionScript",
+                    "duration": 500,
+                    "fadeEvent": "camerafadeincomplete"
+                },
+                {
+                    "prefabId": "34cde368-8bd4-4596-97fc-47c6825699b1",
+                    "id": "810553cb-d621-4473-bfe5-983dcdb2aecc",
+                    "unlock": [
+                        "delay"
+                    ],
+                    "label": "timeEventActionScript",
+                    "delay": 3000,
+                    "list": [
+                        {
+                            "prefabId": "26d6c86f-1f9a-4dc9-9d2e-f64a7fbbbb28",
+                            "id": "05d1efad-5cd9-4b07-965b-df9f1fcc3fd5",
+                            "unlock": [
+                                "duration",
+                                "fadeEvent"
+                            ],
+                            "label": "fadeEffectCameraActionScript_1",
+                            "duration": 500,
+                            "fadeEvent": "camerafadeoutcomplete",
+                            "list": [
+                                {
+                                    "prefabId": "6b1b396b-83fa-4b7a-8360-c7e156fc0f24",
+                                    "id": "1259b797-7112-47d2-b3fd-64864acaf92e",
+                                    "unlock": [
+                                        "sceneKey"
+                                    ],
+                                    "label": "startSceneActionScript",
+                                    "sceneKey": "Level"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

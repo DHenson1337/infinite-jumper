@@ -9,116 +9,137 @@ import PlayerPrefab from "../prefabs/PlayerPrefab.js";
 import PlatformGroupPrefab from "../prefabs/PlatformGroupPrefab.js";
 import OnAwakeActionScript from "../scriptnodes/utils/OnAwakeActionScript.js";
 import LaunchSceneActionScript from "../scriptnodes/scene/LaunchSceneActionScript.js";
+import TimeEventActionScript from "../scriptnodes/timer/TimeEventActionScript.js";
+import FadeEffectCameraActionScript from "../scriptnodes/camera/FadeEffectCameraActionScript.js";
+import StartSceneActionScript from "../scriptnodes/scene/StartSceneActionScript.js";
+import StopSceneActionScript from "../scriptnodes/scene/StopSceneActionScript.js";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
 export default class Level extends Phaser.Scene {
-  constructor() {
-    super("Level");
 
-    /* START-USER-CTR-CODE */
+	constructor() {
+		super("Level");
+
+		/* START-USER-CTR-CODE */
     // Write your code here.
     /* END-USER-CTR-CODE */
-  }
+	}
 
-  /** @returns {void} */
-  editorCreate() {
-    // leftKeyboard_key
-    const leftKeyboard_key = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.LEFT
-    );
+	/** @returns {void} */
+	editorCreate() {
 
-    // rightKeyboard_key
-    const rightKeyboard_key = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.RIGHT
-    );
+		// leftKeyboard_key
+		const leftKeyboard_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
 
-    // levelLayer
-    const levelLayer = this.add.layer();
-    levelLayer.blendMode = Phaser.BlendModes.SKIP_CHECK;
+		// rightKeyboard_key
+		const rightKeyboard_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
-    // backgroundPrefab
-    const backgroundPrefab = new BackgroundPrefab(this, 0, 0);
-    levelLayer.add(backgroundPrefab);
+		// levelLayer
+		const levelLayer = this.add.layer();
+		levelLayer.blendMode = Phaser.BlendModes.SKIP_CHECK;
 
-    // foregroundPrefab
-    const foregroundPrefab = new ForegroundPrefab(this, 0, 0);
-    levelLayer.add(foregroundPrefab);
+		// backgroundPrefab
+		const backgroundPrefab = new BackgroundPrefab(this, 0, 0);
+		levelLayer.add(backgroundPrefab);
 
-    // leftWallTileSprite
-    const leftWallTileSprite = new WallPrefab(this, 0, 0);
-    levelLayer.add(leftWallTileSprite);
+		// foregroundPrefab
+		const foregroundPrefab = new ForegroundPrefab(this, 0, 0);
+		levelLayer.add(foregroundPrefab);
 
-    // rightWallTileSprite
-    const rightWallTileSprite = new WallPrefab(this, 208, 0);
-    rightWallTileSprite.flipX = true;
-    rightWallTileSprite.flipY = false;
-    levelLayer.add(rightWallTileSprite);
+		// leftWallTileSprite
+		const leftWallTileSprite = new WallPrefab(this, 0, 0);
+		levelLayer.add(leftWallTileSprite);
 
-    // playerLayer
-    const playerLayer = this.add.layer();
-    playerLayer.blendMode = Phaser.BlendModes.SKIP_CHECK;
+		// rightWallTileSprite
+		const rightWallTileSprite = new WallPrefab(this, 208, 0);
+		rightWallTileSprite.flipX = true;
+		rightWallTileSprite.flipY = false;
+		levelLayer.add(rightWallTileSprite);
 
-    // player
-    const player = new PlayerPrefab(this, 120, -84);
-    playerLayer.add(player);
+		// playerLayer
+		const playerLayer = this.add.layer();
+		playerLayer.blendMode = Phaser.BlendModes.SKIP_CHECK;
 
-    // platformGroupPrefab
-    const platformGroupPrefab = new PlatformGroupPrefab(this);
-    this.add.existing(platformGroupPrefab);
+		// player
+		const player = new PlayerPrefab(this, 120, -84);
+		playerLayer.add(player);
 
-    // onAwakeActionScript
-    const onAwakeActionScript = new OnAwakeActionScript(this);
+		// platformGroupPrefab
+		const platformGroupPrefab = new PlatformGroupPrefab(this);
+		this.add.existing(platformGroupPrefab);
 
-    // launchSceneActionScript
-    const launchSceneActionScript = new LaunchSceneActionScript(
-      onAwakeActionScript
-    );
+		// onAwakeActionScript
+		const onAwakeActionScript = new OnAwakeActionScript(this);
 
-    // lists
-    const movingLevelTileSprites = [
-      rightWallTileSprite,
-      leftWallTileSprite,
-      foregroundPrefab,
-    ];
-    const walls = [leftWallTileSprite, rightWallTileSprite];
+		// launchSceneActionScript
+		const launchSceneActionScript = new LaunchSceneActionScript(onAwakeActionScript);
 
-    // playerWithPlatformsCollider
-    this.physics.add.collider(player, platformGroupPrefab.group);
+		// timeEventActionScriptForSceneTransition
+		const timeEventActionScriptForSceneTransition = new TimeEventActionScript(this);
 
-    // playerWithWallsCollider
-    this.physics.add.collider(player, walls);
+		// fadeEffectCameraActionScript
+		const fadeEffectCameraActionScript = new FadeEffectCameraActionScript(timeEventActionScriptForSceneTransition);
 
-    // rightWallTileSprite (prefab fields)
-    rightWallTileSprite.tileOffsetY = -120;
+		// startSceneActionScript
+		const startSceneActionScript = new StartSceneActionScript(fadeEffectCameraActionScript);
 
-    // launchSceneActionScript (prefab fields)
-    launchSceneActionScript.sceneKey = "UI";
+		// stopSceneActionScript
+		const stopSceneActionScript = new StopSceneActionScript(timeEventActionScriptForSceneTransition);
 
-    this.player = player;
-    this.platformGroupPrefab = platformGroupPrefab;
-    this.leftKeyboard_key = leftKeyboard_key;
-    this.rightKeyboard_key = rightKeyboard_key;
-    this.movingLevelTileSprites = movingLevelTileSprites;
-    this.walls = walls;
+		// lists
+		const movingLevelTileSprites = [rightWallTileSprite, leftWallTileSprite, foregroundPrefab];
+		const walls = [leftWallTileSprite, rightWallTileSprite];
 
-    this.events.emit("scene-awake");
-  }
+		// playerWithPlatformsCollider
+		this.physics.add.collider(player, platformGroupPrefab.group);
 
-  /** @type {PlayerPrefab} */
-  player;
-  /** @type {PlatformGroupPrefab} */
-  platformGroupPrefab;
-  /** @type {Phaser.Input.Keyboard.Key} */
-  leftKeyboard_key;
-  /** @type {Phaser.Input.Keyboard.Key} */
-  rightKeyboard_key;
-  /** @type {Array<WallPrefab|ForegroundPrefab>} */
-  movingLevelTileSprites;
-  /** @type {WallPrefab[]} */
-  walls;
+		// playerWithWallsCollider
+		this.physics.add.collider(player, walls);
 
-  /* START-USER-CODE */
+		// rightWallTileSprite (prefab fields)
+		rightWallTileSprite.tileOffsetY = -120;
+
+		// launchSceneActionScript (prefab fields)
+		launchSceneActionScript.sceneKey = "UI";
+
+		// fadeEffectCameraActionScript (prefab fields)
+		fadeEffectCameraActionScript.duration = 500;
+		fadeEffectCameraActionScript.fadeEvent = "camerafadeoutcomplete";
+
+		// startSceneActionScript (prefab fields)
+		startSceneActionScript.sceneKey = "GameOver";
+
+		// stopSceneActionScript (prefab fields)
+		stopSceneActionScript.sceneKey = "UI";
+
+		this.player = player;
+		this.platformGroupPrefab = platformGroupPrefab;
+		this.timeEventActionScriptForSceneTransition = timeEventActionScriptForSceneTransition;
+		this.leftKeyboard_key = leftKeyboard_key;
+		this.rightKeyboard_key = rightKeyboard_key;
+		this.movingLevelTileSprites = movingLevelTileSprites;
+		this.walls = walls;
+
+		this.events.emit("scene-awake");
+	}
+
+	/** @type {PlayerPrefab} */
+	player;
+	/** @type {PlatformGroupPrefab} */
+	platformGroupPrefab;
+	/** @type {TimeEventActionScript} */
+	timeEventActionScriptForSceneTransition;
+	/** @type {Phaser.Input.Keyboard.Key} */
+	leftKeyboard_key;
+	/** @type {Phaser.Input.Keyboard.Key} */
+	rightKeyboard_key;
+	/** @type {Array<WallPrefab|ForegroundPrefab>} */
+	movingLevelTileSprites;
+	/** @type {WallPrefab[]} */
+	walls;
+
+	/* START-USER-CODE */
   firstJumpMade = false; //Prevents movement b4 first jump
   isGameOver = false;
   currentScore = 0; //Starting Score
@@ -254,6 +275,12 @@ export default class Level extends Phaser.Scene {
         duration: 2500,
         onComplete: () => {
           this.player.body.enable = false;
+          this.registry.set("score", this.currentScore);
+          this.timeEventActionScriptForSceneTransition.execute();
+
+          // Have Scripts for these actions now
+          // this.scene.stop("UI"); //Stops UI Scene from showing when game over occurs
+          // this.scene.start("GameOver");
           console.log("Game Over💔");
         },
       });

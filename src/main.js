@@ -1,6 +1,7 @@
 import Level from "./scenes/Level.js";
 import Preload from "./scenes/Preload.js";
 import UI from "./scenes/UI.js";
+import GameOver from "./scenes/GameOver.js";
 
 window.addEventListener("load", function () {
   var game = new Phaser.Game({
@@ -27,5 +28,6 @@ window.addEventListener("load", function () {
 
   game.scene.add("Level", Level);
   game.scene.add("UI", UI);
+  game.scene.add("GameOver", GameOver);
   game.scene.add("Preload", Preload, true);
 });
