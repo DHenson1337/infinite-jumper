@@ -1,0 +1,241 @@
+{
+    "id": "b46ff77d-bec5-4b85-a0b0-307a8b3f87dc",
+    "sceneType": "SCENE",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "importFileExtension": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Title",
+        "borderWidth": 240,
+        "borderHeight": 176
+    },
+    "displayList": [
+        {
+            "type": "Layer",
+            "id": "a4ad1904-5f5f-4441-82a8-f950a75e21ed",
+            "label": "levelLayer",
+            "blendMode": -1,
+            "list": [
+                {
+                    "prefabId": "e36e39bf-96f0-4272-8f6e-d595a0716073",
+                    "id": "aecb4b4c-1166-40d2-a0b9-cf92d95babdc",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "backgroundPrefab",
+                    "x": 0,
+                    "y": 0
+                },
+                {
+                    "prefabId": "74939ea9-b4be-4eae-b3df-66a4c233a179",
+                    "id": "7f716c3d-f884-49c0-bd66-bce977c27829",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "foregroundPrefab",
+                    "x": 0,
+                    "y": 0
+                },
+                {
+                    "prefabId": "f7c2ba08-373d-40d6-88cc-69111afa0fa7",
+                    "id": "bf2af530-76e3-42cb-be11-c20a2b7c1ce2",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "leftWallTileSprite",
+                    "displayName": "Left Wall",
+                    "x": 0,
+                    "y": 0
+                },
+                {
+                    "prefabId": "f7c2ba08-373d-40d6-88cc-69111afa0fa7",
+                    "id": "d3c6a313-2b9d-4727-80ce-09f3d4854ff7",
+                    "unlock": [
+                        "x",
+                        "y",
+                        "flipX",
+                        "flipY",
+                        "tileOffsetY",
+                        "tilePositionX",
+                        "tilePositionY"
+                    ],
+                    "label": "rightWallTileSprite",
+                    "displayName": "Right Wall",
+                    "tileOffsetY": -120,
+                    "x": 208,
+                    "y": 0,
+                    "flipX": true,
+                    "flipY": false,
+                    "tilePositionX": 0,
+                    "tilePositionY": -120
+                },
+                {
+                    "type": "Image",
+                    "id": "d2a81b39-94f8-430f-8649-a53de86fa600",
+                    "label": "ground",
+                    "texture": {
+                        "key": "ground"
+                    },
+                    "y": 144,
+                    "originX": 0,
+                    "originY": 0
+                }
+            ]
+        },
+        {
+            "type": "Layer",
+            "id": "a1d47a31-91c3-4abe-8b90-347d61d94ad1",
+            "label": "playerLayer",
+            "blendMode": -1,
+            "list": [
+                {
+                    "prefabId": "4258f822-0290-43df-8540-1a0b61dc5d8f",
+                    "id": "98aaec3e-88e3-4564-843e-69090e068b27",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "player",
+                    "displayName": "Player",
+                    "scope": "CLASS",
+                    "x": 120,
+                    "y": 136
+                }
+            ]
+        },
+        {
+            "type": "Text",
+            "id": "fce9ebff-3c1b-4588-a1e3-f026e22df324",
+            "label": "titleTextGameObject",
+            "displayName": "Title Text",
+            "x": 32,
+            "y": 15,
+            "text": "Warped Cave\nEscape",
+            "lineSpacing": 3,
+            "align": "center",
+            "fontFamily": "PressStart2P-Regular",
+            "color": "#00ace1ff",
+            "stroke": "#00ffff",
+            "shadow.offsetX": 3,
+            "shadow.offsetY": 1,
+            "shadow.fill": true
+        },
+        {
+            "type": "Text",
+            "id": "632d3ed5-06d9-4afa-890c-e5e44176609a",
+            "label": "clickToPlayTextGameObject",
+            "displayName": "Click To Play",
+            "x": 68,
+            "y": 81,
+            "text": "Click to play",
+            "fontFamily": "PressStart2P-Regular",
+            "fontSize": "8px",
+            "color": "#59006eff",
+            "stroke": "#000000"
+        },
+        {
+            "prefabId": "7bf8a19d-1211-4b59-bb38-b034085b171f",
+            "id": "30d68b90-bac6-4980-ae5f-9a4f2fa3dac7",
+            "label": "onAwakeActionScript",
+            "list": [
+                {
+                    "prefabId": "26d6c86f-1f9a-4dc9-9d2e-f64a7fbbbb28",
+                    "id": "7cb0c4d7-5533-4405-b46b-9ee53473cdde",
+                    "unlock": [
+                        "duration",
+                        "fadeEvent"
+                    ],
+                    "label": "fadeEffectCameraActionScript",
+                    "duration": 1000,
+                    "fadeEvent": "camerafadeincomplete"
+                },
+                {
+                    "prefabId": "60f765a5-206f-4094-911b-c11367630985",
+                    "id": "fc32d07e-dc41-4e53-86c4-5ae3cecdb161",
+                    "unlock": [
+                        "target",
+                        "duration",
+                        "yoyo",
+                        "repeat",
+                        "delay",
+                        "loopDelay",
+                        "tweenProperty",
+                        "tweenPropertyValue"
+                    ],
+                    "label": "tweenActionScript",
+                    "target": "clickToPlayTextGameObject",
+                    "duration": 1200,
+                    "yoyo": true,
+                    "repeat": -1,
+                    "delay": 500,
+                    "loopDelay": 500,
+                    "tweenProperty": "alpha",
+                    "tweenPropertyValue": "0.2"
+                },
+                {
+                    "prefabId": "e8e75fbe-17a0-49df-ae3c-964d0ecbf8f9",
+                    "id": "b6a1f566-4556-4bde-a21d-64d7b6957bb6",
+                    "unlock": [
+                        "once"
+                    ],
+                    "label": "sceneOnPointerDownActionScript",
+                    "once": true,
+                    "list": [
+                        {
+                            "prefabId": "e29bc630-dabe-4a8c-97e0-45ccb875b877",
+                            "id": "e5e7d0d8-d051-4c68-a981-b19f0cd68f08",
+                            "unlock": [
+                                "callback"
+                            ],
+                            "label": "callbackActionScript",
+                            "callback": "() => (this.startGame())"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "prefabId": "34cde368-8bd4-4596-97fc-47c6825699b1",
+            "id": "30a86328-9f1b-4e7d-b0d7-e92fb3ce4a25",
+            "label": "timeEventActionScriptForSceneTransition",
+            "displayName": "Start Next Scene Script",
+            "scope": "CLASS",
+            "list": [
+                {
+                    "prefabId": "26d6c86f-1f9a-4dc9-9d2e-f64a7fbbbb28",
+                    "id": "fafd2b93-d793-4bbb-879c-9851c7f5f02d",
+                    "unlock": [
+                        "duration",
+                        "fadeEvent"
+                    ],
+                    "label": "fadeEffectCameraActionScript_1",
+                    "duration": 500,
+                    "fadeEvent": "camerafadeoutcomplete",
+                    "list": [
+                        {
+                            "prefabId": "6b1b396b-83fa-4b7a-8360-c7e156fc0f24",
+                            "id": "03701ae5-080f-4e4d-9aa5-7a5ccb89bfbe",
+                            "unlock": [
+                                "sceneKey"
+                            ],
+                            "label": "startSceneActionScript",
+                            "sceneKey": "Level"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

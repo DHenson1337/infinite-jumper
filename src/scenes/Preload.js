@@ -1,4 +1,3 @@
-
 // You can write more code here
 
 /* START OF COMPILED CODE */
@@ -7,73 +6,71 @@
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
+  constructor() {
+    super("Preload");
 
-	constructor() {
-		super("Preload");
+    /* START-USER-CTR-CODE */
+    // Write your code here.
+    /* END-USER-CTR-CODE */
+  }
 
-		/* START-USER-CTR-CODE */
-		// Write your code here.
-		/* END-USER-CTR-CODE */
-	}
+  /** @returns {void} */
+  editorPreload() {
+    this.load.pack("asset-pack", "assets/asset-pack.json");
+  }
 
-	/** @returns {void} */
-	editorPreload() {
+  /** @returns {void} */
+  editorCreate() {
+    // progressBar
+    const progressBar = this.add.rectangle(553, 361, 256, 20);
+    progressBar.setOrigin(0, 0);
+    progressBar.isFilled = true;
+    progressBar.fillColor = 14737632;
 
-		this.load.pack("asset-pack", "assets/asset-pack.json");
-	}
+    // progressBarBg
+    const progressBarBg = this.add.rectangle(553.0120849609375, 361, 256, 20);
+    progressBarBg.setOrigin(0, 0);
+    progressBarBg.fillColor = 14737632;
+    progressBarBg.isStroked = true;
 
-	/** @returns {void} */
-	editorCreate() {
+    // loadingText
+    const loadingText = this.add.text(552.0120849609375, 329, "", {});
+    loadingText.text = "Loading...";
+    loadingText.setStyle({
+      color: "#e0e0e0",
+      fontFamily: "arial",
+      fontSize: "20px",
+    });
 
-		// progressBar
-		const progressBar = this.add.rectangle(553, 361, 256, 20);
-		progressBar.setOrigin(0, 0);
-		progressBar.isFilled = true;
-		progressBar.fillColor = 14737632;
+    this.progressBar = progressBar;
 
-		// progressBarBg
-		const progressBarBg = this.add.rectangle(553.0120849609375, 361, 256, 20);
-		progressBarBg.setOrigin(0, 0);
-		progressBarBg.fillColor = 14737632;
-		progressBarBg.isStroked = true;
+    this.events.emit("scene-awake");
+  }
 
-		// loadingText
-		const loadingText = this.add.text(552.0120849609375, 329, "", {});
-		loadingText.text = "Loading...";
-		loadingText.setStyle({ "color": "#e0e0e0", "fontFamily": "arial", "fontSize": "20px" });
+  /** @type {Phaser.GameObjects.Rectangle} */
+  progressBar;
 
-		this.progressBar = progressBar;
+  /* START-USER-CODE */
 
-		this.events.emit("scene-awake");
-	}
+  // Write your code here
 
-	/** @type {Phaser.GameObjects.Rectangle} */
-	progressBar;
+  preload() {
+    this.editorCreate();
 
-	/* START-USER-CODE */
+    this.editorPreload();
 
-	// Write your code here
+    const width = this.progressBar.width;
 
-	preload() {
+    this.load.on("progress", (progress) => {
+      this.progressBar.width = progress * width;
+    });
+  }
 
-		this.editorCreate();
+  create() {
+    this.scene.start("Title");
+  }
 
-		this.editorPreload();
-
-		const width =  this.progressBar.width;
-
-		this.load.on("progress", (progress) => {
-
-			this.progressBar.width = progress * width;
-		});
-	}
-
-	create() {
-
-		this.scene.start("Level");
-	}
-
-	/* END-USER-CODE */
+  /* END-USER-CODE */
 }
 
 /* END OF COMPILED CODE */

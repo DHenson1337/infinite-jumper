@@ -8,9 +8,9 @@ import WallPrefab from "../prefabs/WallPrefab.js";
 import PlayerPrefab from "../prefabs/PlayerPrefab.js";
 import PlatformGroupPrefab from "../prefabs/PlatformGroupPrefab.js";
 import OnAwakeActionScript from "../scriptnodes/utils/OnAwakeActionScript.js";
+import FadeEffectCameraActionScript from "../scriptnodes/camera/FadeEffectCameraActionScript.js";
 import LaunchSceneActionScript from "../scriptnodes/scene/LaunchSceneActionScript.js";
 import TimeEventActionScript from "../scriptnodes/timer/TimeEventActionScript.js";
-import FadeEffectCameraActionScript from "../scriptnodes/camera/FadeEffectCameraActionScript.js";
 import StartSceneActionScript from "../scriptnodes/scene/StartSceneActionScript.js";
 import StopSceneActionScript from "../scriptnodes/scene/StopSceneActionScript.js";
 /* START-USER-IMPORTS */
@@ -72,8 +72,11 @@ export default class Level extends Phaser.Scene {
 		// onAwakeActionScript
 		const onAwakeActionScript = new OnAwakeActionScript(this);
 
+		// fadeEffectCameraActionScript_1
+		const fadeEffectCameraActionScript_1 = new FadeEffectCameraActionScript(onAwakeActionScript);
+
 		// launchSceneActionScript
-		const launchSceneActionScript = new LaunchSceneActionScript(onAwakeActionScript);
+		const launchSceneActionScript = new LaunchSceneActionScript(fadeEffectCameraActionScript_1);
 
 		// timeEventActionScriptForSceneTransition
 		const timeEventActionScriptForSceneTransition = new TimeEventActionScript(this);
@@ -99,6 +102,10 @@ export default class Level extends Phaser.Scene {
 
 		// rightWallTileSprite (prefab fields)
 		rightWallTileSprite.tileOffsetY = -120;
+
+		// fadeEffectCameraActionScript_1 (prefab fields)
+		fadeEffectCameraActionScript_1.duration = 500;
+		fadeEffectCameraActionScript_1.fadeEvent = "camerafadeincomplete";
 
 		// launchSceneActionScript (prefab fields)
 		launchSceneActionScript.sceneKey = "UI";
