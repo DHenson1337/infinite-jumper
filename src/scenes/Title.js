@@ -1,5 +1,6 @@
 // You can write more code here
 
+//(Nothing new to report)
 /* START OF COMPILED CODE */
 
 import BackgroundPrefab from "../prefabs/BackgroundPrefab.js";
